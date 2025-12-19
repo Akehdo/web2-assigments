@@ -1,0 +1,10 @@
+{
+  "goods": [
+    {
+      "id": 1,
+      "name": "phone",
+      "price": 3500,
+      "category": "mobilePhones"
+    }
+  ]
+}
