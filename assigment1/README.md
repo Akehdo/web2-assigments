@@ -10,7 +10,7 @@ Data is stored in a local JSON file (`data.json`).
 
 ## How to Install Dependencies
 
-1. ``` git clone https://github.com/Akehdo/web2-assigments/assigment1```
+1. ``` git clone https://github.com/Akehdo/web2-assigments/tree/master/assigment1```
 2. Open terminal in the project folder
 3. In terminal: ``` npm install ```
 4. In terminal: ``` node server.js```
