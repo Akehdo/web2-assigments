@@ -113,7 +113,7 @@ API keys are stored securely in environment variables.
 
 ### GET /api/bingx/referrals
 
-![alt text](res/img_1.png)
+![image.png](res/image.png)
 
 ### Response:
 
