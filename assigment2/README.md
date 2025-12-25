@@ -22,10 +22,13 @@ API keys are stored securely in environment variables.
 2. Open terminal in the project folder
 3. In terminal: `npm install`
 4. Create a .env file and add your API keys:
-    ```
+
+   ```
    OPENWEATHER_API_KEY=your_openweather_key
-    NEWS_API_KEY=your_newsapi_key
-    ```
+   NEWS_API_KEY=your_newsapi_key
+   BINGX_API_KEY=your-bingx-api-key
+   BINGX_SECRET_KEY=your-bingx-secret-key
+   ```
 
 5. In terminal: ` node server.js`
 6. The server will run on: http://localhost:3001
@@ -37,8 +40,10 @@ API keys are stored securely in environment variables.
 - GET /api/weather - returns current weather data for a given city.
 
 # Example Postman Requests
+
 ### Query Parameters:
-* city – city name 
+
+- city – city name
 
 ### GET /api/weather?city=London
 
@@ -65,17 +70,17 @@ API keys are stored securely in environment variables.
 ]
 ```
 
-
 ### News API
 
 - GET /api/news - Returns top news headlines for a given country.
 
 # Example Postman Requests
+
 ### Query Parameters:
-* country – country code (ISO 3166-1)
+
+- country – country code (ISO 3166-1)
 
 ### GET /api/news?country=US
-
 
 ![img_1.png](res/img_1.png)
 
@@ -99,5 +104,28 @@ API keys are stored securely in environment variables.
 ]
 ```
 
+### Bingx API
 
+- GET /api/bingx/referrals Returns a list of directly invited referral accounts.
+  Only accounts with directInvitation = true are included in the response.
 
+# Example Postman Requests
+
+### GET /api/bingx/referrals
+
+![alt text](res/img_1.png)
+
+### Response:
+
+```
+[
+   [
+	{
+		"uid": 21312312
+	},
+	{
+		"uid": 31231231
+	}
+]
+]
+```
