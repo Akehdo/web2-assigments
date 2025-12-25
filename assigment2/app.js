@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 
-const weatherRoutes = require("./routes/weather.routes");
-const newsRoutes = require("./routes/news.routes");
-const bingxRoutes = require("./routes/bingx.routes");
+const weatherRoutes = require("./src/routes/weather.routes");
+const newsRoutes = require("./src/routes/news.routes");
+const bingxRoutes = require("./src/routes/bingx.routes");
 
 const app = express();
 
