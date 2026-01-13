@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Goods API</title>
+  </head>
+  <body>
+    <h2>Create good</h2>
+    <input id="c_name" placeholder="name" /><br /><br />
+    <input id="c_price" type="number" placeholder="price" /><br /><br />
+    <input id="c_category" placeholder="category" /><br /><br />
+    <button onclick="createGood()">Create</button>
+
+    <hr />
+    <h2>Get all goods</h2>
+    <button onclick="loadGoods()">Refresh</button>
+    <ul id="goods"></ul>
+
+    <hr />
+
+    <h2>Get good by ID</h2>
+    <input id="g_id" placeholder="id" /><br /><br />
+    <button onclick="getById()">Get by ID</button>
+    <pre id="getResult"></pre>
+
+    <hr />
+
+    <h2>Update good (PUT)</h2>
+    <input id="u_id" placeholder="id" /><br /><br />
+    <input id="u_name" placeholder="name" /><br /><br />
+    <input id="u_price" type="number" placeholder="price" /><br /><br />
+    <input id="u_category" placeholder="category" /><br /><br />
+    <button onclick="updateGood()">Update</button>
+
+    <hr />
+
+    <h2>Delete good</h2>
+    <input id="d_id" placeholder="id" /><br /><br />
+    <button onclick="deleteGood()">Delete</button>
+
+    <script>
+      const API = "http://localhost:3000/goods";
+
+      async function loadGoods() {
+        const res = await fetch(API);
+        const data = await res.json();
+        const list = document.getElementById("goods");
+        list.innerHTML = "";
+
+        if (!Array.isArray(data)) {
+          list.innerHTML = "<li>No goods</li>";
+          return;
+        }
+
+        data.forEach((g) => {
+          const li = document.createElement("li");
+          li.textContent = `${g._id} | ${g.name} | ${g.price} | ${g.category}`;
+          list.appendChild(li);
+        });
+      }
+
+      async function createGood() {
+        const name = c_name.value;
+        const price = c_price.value;
+        const category = c_category.value;
+
+        await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, price, category }),
+        });
+
+        loadGoods();
+      }
+
+      async function getById() {
+        const id = g_id.value;
+        const res = await fetch(`${API}/${id}`);
+        const data = await res.json();
+        document.getElementById("getResult").textContent = JSON.stringify(data);
+      }
+
+      async function updateGood() {
+        const id = u_id.value;
+
+        const update = {};
+
+        if (u_name.value.trim() !== "") update.name = u_name.value;
+        if (u_price.value.trim() !== "") update.price = Number(u_price.value);
+        if (u_category.value.trim() !== "") update.category = u_category.value;
+
+        if (Object.keys(update).length === 0) {
+          alert("Nothing to update");
+          return;
+        }
+
+        await fetch(`${API}/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(update),
+        });
+
+        loadGoods();
+      }
+
+      async function deleteGood() {
+        const id = d_id.value;
+        await fetch(`${API}/${id}`, { method: "DELETE" });
+        loadGoods();
+      }
+
+      loadGoods();
+    </script>
+  </body>
+</html>
